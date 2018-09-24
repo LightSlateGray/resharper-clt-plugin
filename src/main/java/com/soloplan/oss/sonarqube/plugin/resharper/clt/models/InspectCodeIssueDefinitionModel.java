@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2018 Soloplan GmbH
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.soloplan.oss.sonarqube.plugin.resharper.clt.models;
 
 import com.soloplan.oss.sonarqube.plugin.resharper.clt.enumerations.InspectCodeIssueSeverity;
@@ -13,8 +29,8 @@ public class InspectCodeIssueDefinitionModel {
 
   // region Member variables
 
-  /** The issue identifier that should be unique within {@code InspectCode}. */
-  private final String issueId;
+  /** The issue type identifier that should be unique within {@code InspectCode}. */
+  private final String issueTypeId;
 
   /** The category name of the issue within {@code InspectCode}. */
   private String category;
@@ -40,13 +56,14 @@ public class InspectCodeIssueDefinitionModel {
   // endregion
 
   /**
-   * Creates a new instance of the {@link InspectCodeIssueDefinitionModel} class using the supplied {@code issueId} as unique identifier.
+   * Creates a new instance of the {@link InspectCodeIssueDefinitionModel} class using the supplied {@code issueTypeId} as unique
+   * identifier.
    *
-   * @param issueId
+   * @param issueTypeId
    *     The unique identifier of this issue as defined by {@code InspectCode}.
    */
-  public InspectCodeIssueDefinitionModel(@NotNull String issueId) {
-    this.issueId = issueId.trim();
+  public InspectCodeIssueDefinitionModel(@NotNull String issueTypeId) {
+    this.issueTypeId = issueTypeId.trim();
   }
 
   /**
@@ -54,8 +71,8 @@ public class InspectCodeIssueDefinitionModel {
    *
    * @return The unique identifier of this issue as defined by {@code InspectCode}.
    */
-  public String getIssueId() {
-    return issueId;
+  public String getIssueTypeId() {
+    return issueTypeId;
   }
 
   /**
@@ -173,8 +190,8 @@ public class InspectCodeIssueDefinitionModel {
    * value.
    *
    * @param severityValue
-   *     A {@link String} value that will be parsed to its corresponding {@link InspectCodeIssueSeverity} value and set as the new new
-   *     severity value of this issue as defined by {@code InspectCode}.
+   *     A {@link String} value that will be parsed to its corresponding {@link InspectCodeIssueSeverity} value and set as the new severity
+   *     value of this issue as defined by {@code InspectCode}.
    */
   public void setSeverity(String severityValue) {
     this.severity = InspectCodeIssueSeverity.fromSeverityValue(severityValue);
@@ -247,18 +264,18 @@ public class InspectCodeIssueDefinitionModel {
       return false;
     }
 
-    return this.issueId.equals(((InspectCodeIssueDefinitionModel) other).issueId);
+    return this.issueTypeId.equals(((InspectCodeIssueDefinitionModel) other).issueTypeId);
   }
 
   @Override
   public int hashCode() {
-    return this.issueId.hashCode();
+    return this.issueTypeId.hashCode();
   }
 
   @Override
   public String toString() {
     return "InspectCodeIssueDefinitionModel{" +
-        "issueId='" + issueId + '\'' +
+        "issueTypeId='" + issueTypeId + '\'' +
         ", category='" + category + '\'' +
         ", categoryId='" + categoryId + '\'' +
         ", description='" + description + '\'' +

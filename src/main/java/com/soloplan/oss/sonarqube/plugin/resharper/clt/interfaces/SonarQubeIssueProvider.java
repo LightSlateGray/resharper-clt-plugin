@@ -16,18 +16,21 @@
 
 package com.soloplan.oss.sonarqube.plugin.resharper.clt.interfaces;
 
-import org.sonar.api.config.PropertyDefinition;
+import com.soloplan.oss.sonarqube.plugin.resharper.clt.models.SonarQubeIssueModel;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
 
 /**
- * This interface defines an accessor method that will create an instance of the {@link PropertyDefinition} class, which will be used to
- * create property available within the configuration page of SonarQube.
+ * An interface that can be implemented by classes that would like to provide issues to SonarQube.
  */
-public interface PluginConfigurationProperty {
+public interface SonarQubeIssueProvider {
+
   /**
-   * Returns an instance of the {@link PropertyDefinition} class which in turn will create a property available within the SonarQube
-   * configuration page.
+   * Returns a {@link Collection} of {@link SonarQubeIssueModel} instances.
    *
-   * @return An instance of the {@link PropertyDefinition} class.
+   * @return A {@link Collection} of {@link SonarQubeIssueModel} instances.
    */
-  PropertyDefinition buildPropertyDefinition();
+  @NotNull
+  Collection<SonarQubeIssueModel> getIssues();
 }

@@ -16,18 +16,20 @@
 
 package com.soloplan.oss.sonarqube.plugin.resharper.clt.interfaces;
 
-import org.sonar.api.config.PropertyDefinition;
+import com.soloplan.oss.sonarqube.plugin.resharper.clt.models.SonarQubeRuleDefinitionOverrideModel;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * This interface defines an accessor method that will create an instance of the {@link PropertyDefinition} class, which will be used to
- * create property available within the configuration page of SonarQube.
+import java.util.Collection;
+
+/*
+ * An interface that can be implemented by classes that would like to provide rule definition overrides for SonarQube.
  */
-public interface PluginConfigurationProperty {
+public interface SonarQubeRuleDefinitionOverrideProvider {
   /**
-   * Returns an instance of the {@link PropertyDefinition} class which in turn will create a property available within the SonarQube
-   * configuration page.
+   * Returns a {@link Collection} of {@link SonarQubeRuleDefinitionOverrideModel} instances.
    *
-   * @return An instance of the {@link PropertyDefinition} class.
+   * @return A {@link Collection} of {@link SonarQubeRuleDefinitionOverrideModel} instances.
    */
-  PropertyDefinition buildPropertyDefinition();
+  @NotNull
+  Collection<SonarQubeRuleDefinitionOverrideModel> getRuleDefinitionOverrides();
 }

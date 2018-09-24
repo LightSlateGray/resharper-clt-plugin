@@ -1,10 +1,26 @@
+/*
+ *    Copyright 2018 Soloplan GmbH
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.soloplan.oss.sonarqube.plugin.resharper.clt.models;
 
 import com.soloplan.oss.sonarqube.plugin.resharper.clt.enumerations.SonarQubeRuleDescriptionSyntax;
+import com.soloplan.oss.sonarqube.plugin.resharper.clt.enumerations.SonarQubeRuleType;
 import com.soloplan.oss.sonarqube.plugin.resharper.clt.enumerations.SonarQubeSeverity;
 import org.jetbrains.annotations.NotNull;
 import org.sonar.api.rule.RuleStatus;
-import org.sonar.api.rules.RuleType;
 
 /**
  * A model class that provides an abbreviated abstraction over all properties that can be set when creating new SonarQube rules, including
@@ -19,7 +35,7 @@ public final class SonarQubeRuleDefinitionModel {
   private final String ruleDefinitionKey;
 
   /** The type of the SonarQube rule definition. */
-  private RuleType ruleType = RuleType.BUG;
+  private SonarQubeRuleType sonarQubeRuleType = SonarQubeRuleType.getDefaultRuleType();
 
   /** The name of the rule definition as displayed within SonarQube. */
   private String ruleName = "";
@@ -39,7 +55,7 @@ public final class SonarQubeRuleDefinitionModel {
   /** Indicates, whether the SonarQube rule definition is activated by default or not. */
   private boolean activatedByDefault = false;
 
-  // TODO Create a property for 'Rule tags', that accepts only strings containin the following characters: a-z, 0-9, '+', '-', '#', '.'
+  // TODO Create a property for 'Rule tags', that accepts only strings containing the following characters: a-z, 0-9, '+', '-', '#', '.'
 
   // endregion
 
@@ -65,47 +81,19 @@ public final class SonarQubeRuleDefinitionModel {
   }
 
   /**
-   * Gets the rule type of this rule definition which corresponds to the characteristics of the following table.
-   * <table>
-   * <caption>Associations between rule types and characteristics</caption>
-   * <tr><th>Rule type</th><th>Characteristic</th></tr>
-   * <tr><td>{@link RuleType#CODE_SMELL}</td><td>Maintainability</td></tr>
-   * <tr><td>{@link RuleType#BUG}</td><td>Reliability</td></tr>
-   * <tr><td>{@link RuleType#VULNERABILITY}</td><td>Vulnerability</td></tr>
-   * </table>
-   * Defaults to {@link RuleType#BUG} if not explicitly set via call to {@link #setRuleType(RuleType)}.
+   * Gets the {@code SonarQube} compatible rule type of this rule definition.
    *
    * @return The type to set for this rule definition.
-   *
-   * @see <a href="https://jira.sonarsource.com/browse/MMF-184">[MMF-184] SonarQube Quality Model with three characteristics -
-   *     SonarSource</a>
-   * @see <a href="https://docs.sonarqube.org/display/SONAR/Rules+-+types+and+severities">Rules - types and severities - SonarQube
-   *     Documentation - Doc SonarQube</a>
    */
-  public RuleType getRuleType() {
-    return ruleType;
+  public SonarQubeRuleType getSonarQubeRuleType() {
+    return sonarQubeRuleType;
   }
 
   /**
-   * Sets the rule type of this rule definition which corresponds to the characteristics of the following table.
-   * <table>
-   * <caption>Associations between rule types and characteristics</caption>
-   * <tr><th>Rule type</th><th>Characteristic</th></tr>
-   * <tr><td>{@link RuleType#CODE_SMELL}</td><td>Maintainability</td></tr>
-   * <tr><td>{@link RuleType#BUG}</td><td>Reliability</td></tr>
-   * <tr><td>{@link RuleType#VULNERABILITY}</td><td>Vulnerability</td></tr>
-   * </table>
-   *
-   * @param ruleType
-   *     The type to set for this rule definition.
-   *
-   * @see <a href="https://jira.sonarsource.com/browse/MMF-184">[MMF-184] SonarQube Quality Model with three characteristics -
-   *     SonarSource</a>
-   * @see <a href="https://docs.sonarqube.org/display/SONAR/Rules+-+types+and+severities">Rules - types and severities - SonarQube
-   *     Documentation - Doc SonarQube</a>
+   * Sets the {@code SonarQube} compatible rule type of this rule definition.
    */
-  public void setRuleType(@NotNull RuleType ruleType) {
-    this.ruleType = ruleType;
+  public void setSonarQubeRuleType(@NotNull SonarQubeRuleType ruleType) {
+    this.sonarQubeRuleType = ruleType;
   }
 
   /**
@@ -175,7 +163,7 @@ public final class SonarQubeRuleDefinitionModel {
   /**
    * Gets the SonarQube compatible severity value of this rule.
    * <p>
-   * Defaults to {@link SonarQubeSeverity#Major} if not explicitly set via call to {@link #setSonarQubeSeverity(SonarQubeSeverity)}.
+   * Defaults to {@link SonarQubeSeverity#MAJOR} if not explicitly set via call to {@link #setSonarQubeSeverity(SonarQubeSeverity)}.
    * </p>
    *
    * @return The SonarQube compatible severity value of this rule.
@@ -272,7 +260,7 @@ public final class SonarQubeRuleDefinitionModel {
   public String toString() {
     return "SonarQubeRuleDefinitionModel{" +
         "ruleDefinitionKey='" + ruleDefinitionKey + '\'' +
-        ", ruleType=" + ruleType +
+        ", sonarQubeRuleType=" + sonarQubeRuleType +
         ", ruleName='" + ruleName + '\'' +
         ", ruleDescription='" + ruleDescription + '\'' +
         ", ruleDescriptionSyntax=" + ruleDescriptionSyntax +

@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2018 Soloplan GmbH
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.soloplan.oss.sonarqube.plugin.resharper.clt.enumerations;
 
 import org.jetbrains.annotations.NotNull;
@@ -8,22 +24,22 @@ import org.jetbrains.annotations.NotNull;
  */
 public enum InspectCodeIssueSeverity {
   /** Represents the {@code DO_NOT_SHOW} error severity of {@code InspectCode}. */
-  DoNotShow("DO_NOT_SHOW"),
+  DO_NOT_SHOW("DO_NOT_SHOW"),
 
   /** Represents the {@code INVALID_SEVERITY} error severity of {@code InspectCode}. */
-  InvalidSeverity("INVALID_SEVERITY"),
+  INVALID_SEVERITY("INVALID_SEVERITY"),
 
   /** Represents the {@code HINT} error severity of {@code InspectCode}. */
-  Hint("HINT"),
+  HINT("HINT"),
 
   /** Represents the {@code SUGGESTION} error severity of {@code InspectCode}. */
-  Suggestion("SUGGESTION"),
+  SUGGESTION("SUGGESTION"),
 
   /** Represents the {@code WARNING} error severity of {@code InspectCode}. */
-  Warning("WARNING"),
+  WARNING("WARNING"),
 
   /** Represents the {@code ERROR} error severity of {@code InspectCode}. */
-  Error("ERROR");
+  ERROR("ERROR");
 
   /** The string representation of the severity as contained within the resulting XML file of the {@code InspectCode} command line tool. */
   private final String severity;
@@ -50,12 +66,12 @@ public enum InspectCodeIssueSeverity {
   }
 
   /**
-   * Gets the default {@code InspectCode} compatible severity value which corresponds to {@link #Warning}.
+   * Gets the default {@code InspectCode} compatible severity value which corresponds to {@link #WARNING}.
    *
-   * @return The default {@code InspectCode} compatible severity value which corresponds to {@link #Warning}.
+   * @return The default {@code InspectCode} compatible severity value which corresponds to {@link #WARNING}.
    */
   public static InspectCodeIssueSeverity getDefaultSeverity() {
-    return Warning;
+    return WARNING;
   }
 
   /**

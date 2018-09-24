@@ -16,18 +16,20 @@
 
 package com.soloplan.oss.sonarqube.plugin.resharper.clt.interfaces;
 
-import org.sonar.api.config.PropertyDefinition;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * This interface defines an accessor method that will create an instance of the {@link PropertyDefinition} class, which will be used to
- * create property available within the configuration page of SonarQube.
- */
-public interface PluginConfigurationProperty {
+import java.io.InputStream;
+
+/** Simple interface for XML data validation. */
+public interface XmlDataValidator {
+
   /**
-   * Returns an instance of the {@link PropertyDefinition} class which in turn will create a property available within the SonarQube
-   * configuration page.
+   * Validates the supplied XML data input stream.
    *
-   * @return An instance of the {@link PropertyDefinition} class.
+   * @param xmlDataInputStream
+   *     The {@link InputStream} of the XML data to be validated.
+   *
+   * @return {@code True}, if the supplied XML data has been validated successfully, {@code false} otherwise.
    */
-  PropertyDefinition buildPropertyDefinition();
+  boolean validateXmlData(@NotNull final InputStream xmlDataInputStream);
 }
