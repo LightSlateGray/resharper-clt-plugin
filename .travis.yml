@@ -13,7 +13,7 @@ addons:
   sonarcloud: true
   apt:
     packages:
-      - oracle-java9-installer # Use apt to download and install a more recent update of the JDK in version 9
+      - oracle-java8-installer # Use apt to download and install a more recent update of the JDK in version 9
 
 script:
   - mvn --errors clean:clean compiler:compile resources:resources native2ascii:resources sonar-packaging:sonar-plugin
@@ -27,11 +27,9 @@ deploy:
   file: $TRAVIS_BUILD_DIR/target/*.jar
   # Make sure you have skip_cleanup set to true, otherwise Travis CI will delete all the files created during the build
   skip_cleanup: true
-  # NOTE: As long as I am testing this feature, I'll allow overwriting of released binaries
+  # Mark this deployment as pre-release and overwrite any existing deployment
   overwrite: true
-  # NOTE: As long as I am testing this feature, I'll mark each release as draft
-  #draft: true
-  #prerelease: true
+  prerelease: true
   # GitHub Releases uses git tags.
   on:
     tags: true
